@@ -517,3 +517,15 @@ table td{
   padding-top: 1.3rem;
   padding-bottom: 1.3rem;
 }
+
+table td:nth-child(2) img,
+td:nth-child(3) img, 
+td:nth-child(4) img,
+td:nth-child(5) img 
+{
+  display: none;
+}
+
+table td:nth-child(1) img {
+  margin-right: 1.3rem;
+}

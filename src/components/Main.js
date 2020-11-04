@@ -50,6 +50,7 @@ function SmallGraph() {
   return <section className="small__graph">{ dataList }</section>
 };
 
+
 // TRANSACTION DETAILS
 function LedgerDetails() {
   const ledgers = [
@@ -92,6 +93,7 @@ function LedgerDetails() {
   return <section className="ledger">{ ledgerList }</section>
 }
 
+
 // SELECT FORM
 class SelectForm extends React.Component {
   constructor(props) {
@@ -129,7 +131,8 @@ class SelectForm extends React.Component {
   }
 }
 
-// PAYMENTS TRANSACTION TABLE AND DATA
+
+// PAYMENTS TRANSACTION TABLE AND DATA using table instance
 const PaymentTrans = () => {
 
   const COLUMNS = [
@@ -170,11 +173,11 @@ const PaymentTrans = () => {
     headerGroups,
     rows,
     prepareRow,
-    state,
-    setGlobalFilter,
+    // state,
+    // setGlobalFilter,
   } = tableInstance 
 
-  const { globalFilter } = state
+  // const { globalFilter } = state
   return (
     <table {...getTableProps()}>
       <thead>
@@ -195,7 +198,7 @@ const PaymentTrans = () => {
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>
-                  {/* <img src={ viwers_img } /> */}
+                  <img src={ viwers_img } alt="image"/>
                   {cell.render('Cell')}
                   </td>
               })}   
@@ -208,13 +211,16 @@ const PaymentTrans = () => {
 }
 
 // GLOBAL FILTER
-const Filter = ({filter, setFilter}) => {
-  return (
-    <span>
-      <input className="search__input ml-2" placeholder="Search payments" value={ filter || ''} onChange={ e => setFilter(e.target.value)}/>
-    </span>
-  )
-}
+// const Filter = ({filter, setFilter}) => {
+//   return (
+//     <span>
+//       <input className="search__input ml-2" placeholder="Search payments" value={ filter || ''} onChange={ e => setFilter(e.target.value)}/>
+//     </span>
+//   )
+// }
+
+
+
 // MAIN COMPONENTS
 class Main extends Component {
   render() {
@@ -278,8 +284,8 @@ class Main extends Component {
               <p className="mr-5">out of 500 payments</p>
               <section className="search">
                 <img src={ Search_icon } className="Search-logo" alt="Search"/>
-                {/* <input className="search__input ml-2" placeholder="Search payments"/> */}
-                <Filter />
+                <input className="search__input ml-2" placeholder="Search payments"/>
+                {/* <Filter filter={globalFilter} setFilter={setGlobalFilter} /> */}
               </section>
               <section className="select">
                 <SelectForm />
@@ -288,6 +294,7 @@ class Main extends Component {
           </section>
           <section className="bottom__content">
             <PaymentTrans />
+            {/* <Table /> */}
           </section>
         </article>
 
