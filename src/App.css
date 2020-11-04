@@ -458,8 +458,11 @@ article .top__content .search__input::placeholder {
   color: #787878;
 }
 
+.select form  {
+  margin-left: 9rem;
+}
 
-form label {
+.select form label {
   font-size: 13px;
   line-height: 17px;
   color: #000000;
@@ -476,18 +479,41 @@ form select{
   width: 150px;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
+  margin-left: 0.8rem;
 }
 
-.option {
-  height: 5rem;
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
 }
 
-/* form select option{
+table td, table th {
+  padding: 1rem;
+}
+
+table tr{
+  color: #7F8FA4;
   background: #FFFFFF;
-  border: 1px solid #CED0DA;
-  box-sizing: border-box;
-  border-radius: 2px;
-  outline: none;
-  height: 35px;
-  width: 150px;
-} */
+  border-bottom: 1px solid #CCCFD4;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+table tr:hover {background-color: #EAEEF0;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background: #EAEEF0;
+  color: white;
+  font-size: 14px;
+  line-height: 19px;
+  color: #7F8FA4;
+}
+
+table td{
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+}

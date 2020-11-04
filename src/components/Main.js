@@ -4,8 +4,12 @@ import arrow_down from '../assets/arrow_down.svg';
 import Search_icon   from '../assets/Search_icon.svg';
 import range_icon from '../assets/range_icon.svg';
 import blue_dropdown from '../assets/blue dropdown.svg';
-import React, { Component } from 'react'
+import React, { Component, useMemo } from 'react'
+import { useTable, useGlobalFilter } from 'react-table'
+import items_data from '../Data/items.json'
+import viwers_img from '../assets/vw symbol.jpg'
 
+// TRANSACTION DETAILS FOR THE SMALL CHART
 function SmallGraph() {
   const datas = [
     {
@@ -46,6 +50,7 @@ function SmallGraph() {
   return <section className="small__graph">{ dataList }</section>
 };
 
+// TRANSACTION DETAILS
 function LedgerDetails() {
   const ledgers = [
     {
@@ -87,7 +92,8 @@ function LedgerDetails() {
   return <section className="ledger">{ ledgerList }</section>
 }
 
-class FlavorForm extends React.Component {
+// SELECT FORM
+class SelectForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: 'All'};
@@ -123,6 +129,93 @@ class FlavorForm extends React.Component {
   }
 }
 
+// PAYMENTS TRANSACTION TABLE AND DATA
+const PaymentTrans = () => {
+
+  const COLUMNS = [
+    {
+      Header: 'Item Type',
+      accessor: 'item_Name'
+    },
+    {
+      Header: 'Price',
+      accessor: 'price_tag'
+    },
+    {
+      Header: 'Transaction No',
+      accessor: 'Transaction_No'
+    },
+    {
+      Header: 'Time',
+      accessor: 'Time_tag'
+    },
+    {
+      Header: 'Status',
+      accessor: 'Status'
+    }
+  ]
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const columns = useMemo(() => COLUMNS, [])
+  const data = useMemo(() => items_data, [])
+
+  const tableInstance = useTable({
+    columns,
+    data
+  }, useGlobalFilter)
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter,
+  } = tableInstance 
+
+  const { globalFilter } = state
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {
+              headerGroup.headers.map( column => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              ))
+            } 
+          </tr>
+        ))} 
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map((cell) => {
+                return <td {...cell.getCellProps()}>
+                  {/* <img src={ viwers_img } /> */}
+                  {cell.render('Cell')}
+                  </td>
+              })}   
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}
+
+// GLOBAL FILTER
+const Filter = ({filter, setFilter}) => {
+  return (
+    <span>
+      <input className="search__input ml-2" placeholder="Search payments" value={ filter || ''} onChange={ e => setFilter(e.target.value)}/>
+    </span>
+  )
+}
+// MAIN COMPONENTS
 class Main extends Component {
   render() {
     return ( 
@@ -185,15 +278,16 @@ class Main extends Component {
               <p className="mr-5">out of 500 payments</p>
               <section className="search">
                 <img src={ Search_icon } className="Search-logo" alt="Search"/>
-                <input className="search__input ml-2" placeholder="Search payments"/>
+                {/* <input className="search__input ml-2" placeholder="Search payments"/> */}
+                <Filter />
               </section>
-              <section>
-                <FlavorForm />
+              <section className="select">
+                <SelectForm />
               </section>
             </section>
           </section>
           <section className="bottom__content">
-
+            <PaymentTrans />
           </section>
         </article>
 
