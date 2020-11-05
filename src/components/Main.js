@@ -198,7 +198,7 @@ const PaymentTrans = () => {
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>
-                  <img src={ viwers_img } alt="image"/>
+                  <img src={ viwers_img } alt="contact"/>
                   {cell.render('Cell')}
                   </td>
               })}   

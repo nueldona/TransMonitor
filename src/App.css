@@ -410,9 +410,9 @@ article {
   margin-top: 1.5rem;
 }
 
-article .top__content {
+/* article .top__content {
 
-}
+} */
 
 article .top__content h2{
   font-size: 36px;
@@ -528,4 +528,10 @@ td:nth-child(5) img
 
 table td:nth-child(1) img {
   margin-right: 1.3rem;
+}
+
+@media screen and (max-width: 1200px) {
+  #root {
+    display: none;
+  }
 }
